@@ -97,7 +97,14 @@ def _process_plot_format(fmt):
         fmt = fmt.replace(' ', '')
 
     chars = [c for c in fmt]
-
+    if '#' in chars:
+        i = chars.index('#')
+        if i+7 <= len(chars):
+            try:
+                color = mcolors.colorConverter.to_rgb(''.join(chars[i:i+7]))
+                chars = chars[:i]+chars[i+7:]
+            except:
+                pass
     i = 0
     while i < len(chars):
         c = chars[i]
